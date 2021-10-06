@@ -1,4 +1,4 @@
 export const splitAndMerge = (str = "", separator = "") => {
-  return str.split(" ").map(str => str.split("").join(separator)).join(" ");
+  return str.split(" ").map(word => word.split("").join(separator)).join(" ");
 };
 

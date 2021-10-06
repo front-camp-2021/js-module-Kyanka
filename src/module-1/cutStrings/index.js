@@ -1,6 +1,9 @@
 export const cutStrings = (arr = []) => {
-  return arr.map((str) => str.slice(0, arr.reduce((a,b) => a.length <= b.length ? a : b).length));
+  let minLen = arr.length ? arr[0].length : 0;
+  arr.forEach((word) => { minLen = word.length <= minLen ? word.length : minLen});
+  return arr.map(word => word.slice(0,minLen));
 };
+
 
 
 

@@ -30,7 +30,7 @@ export default class Card {
         <div class="rate_cost">
           <div class="rate">
             <span>${this.rating}</span>
-            <img class="icon" src="icons/rate-star.svg" alt="Rate Star">
+            <img class="icon" src="../../icons/rate-star.svg" alt="Rate Star">
           </div>
 
           <div class="cost">
@@ -44,17 +44,15 @@ export default class Card {
         </article>
 
         <div class="action">
-          <button class="wishlist"><img class="icon" src="icons/wishlist.svg">wishlist</button>
-          <button class="purchase "><img class="icon" src="icons/shopping-bag.svg">add to card</button>
+          <button class="wishlist"><img class="icon" src="../../icons/wishlist.svg">wishlist</button>
+          <button class="purchase "><img class="icon" src="../../icons/shopping-bag.svg">add to card</button>
         </div>
       </section>`
   }
 
   render() {
     const wrapper = document.createElement('div');
-
     wrapper.innerHTML = this.getTemplate();
-
     this.element = wrapper.firstElementChild;
   }
 

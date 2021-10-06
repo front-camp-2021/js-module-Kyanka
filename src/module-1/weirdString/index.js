@@ -1,4 +1,17 @@
 export const weirdString = (str = "") => {
- return str.split(" ").map(str => str.length > 0 ? str.slice(0,-1).toUpperCase() + str[str.length-1].toLowerCase() : "").join(" ")
-};
+  return str.split(" ").map(word => {
+    let isFirst = true;
+    return word.split("").reverse().map(char => {
+      if (char.toUpperCase() != char.toLowerCase() && isFirst) {
+        isFirst = false;
+        return char.toLowerCase();
+      } else{
+        return char.toUpperCase();
+      }
+    }).reverse().join("")}).join(" ")
+}
+
+
+
+
 
