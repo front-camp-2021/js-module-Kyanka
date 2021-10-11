@@ -39,7 +39,7 @@ export default class Card {
         </div>
 
         <article class="description">
-          <span>${this.brand}</span>
+          <span>${this.brand} ${this.category}</span>
           <p>${this.title}</p>
         </article>
 

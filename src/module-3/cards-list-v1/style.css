@@ -19,12 +19,11 @@ body::-webkit-scrollbar {
 }
 
 .card-list {
-  width: 100%;
+  width: 65%;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 30rem;
 }
-
 
 .card {
   height: 486rem;
