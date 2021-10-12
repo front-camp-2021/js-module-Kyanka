@@ -74,11 +74,11 @@ export default class SideBar {
   }
 
   getFilterCards() {
-    const categoryFilterList = new FiltersList({
+    const categoryFilterList = new this.Component({
       title: 'Category',
       list: this.categoriesFilter
     });
-    const brandFilterList = new FiltersList({
+    const brandFilterList = new this.Component({
       title: 'Brand',
       list: this.brandFilter
     });
