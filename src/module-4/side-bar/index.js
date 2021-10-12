@@ -1,5 +1,3 @@
-import FiltersList from '../filters-list/index.js';
-
 export default class SideBar {
   element;
   subElements = {};
