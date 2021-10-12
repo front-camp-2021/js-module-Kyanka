@@ -48,7 +48,7 @@ body::-webkit-scrollbar {
   transform: rotate(180deg);
 }
 
-.filter-card {
+.filter-cards {
   flex-grow: 1;
   background: #FFFFFF;
   box-shadow: 0 2rem 8rem rgba(0, 0, 0, 0.14);
