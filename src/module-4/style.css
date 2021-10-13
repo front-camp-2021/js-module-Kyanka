@@ -39,7 +39,7 @@ body::-webkit-scrollbar {
   width: 45rem;
   border-radius: 8rem;
   border: 0;
-  background: #FFFFFF;
+  background: white;
   box-shadow: 0 2rem 8rem rgba(0, 0, 0, 0.14);
 }
 

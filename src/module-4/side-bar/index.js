@@ -1,7 +1,7 @@
 export default class SideBar {
   element;
   subElements = {};
-  onCheck = () => {
+  clearFilters = () => {
     const filters = this.getFilterCards();
     Object.values(filters).forEach(item => item.reset());
     this.update();
@@ -53,7 +53,7 @@ export default class SideBar {
   }
 
   reset() {
-    this.onCheck();
+    this.clearFilters();
   }
 
   update() {
@@ -74,11 +74,12 @@ export default class SideBar {
   }
 
   getFilterCards() {
-    const categoryFilterList = new this.Component({
+    const Filter = this.Component
+    const categoryFilterList = new Filter({
       title: 'Category',
       list: this.categoriesFilter
     });
-    const brandFilterList = new this.Component({
+    const brandFilterList = new Filter({
       title: 'Brand',
       list: this.brandFilter
     });
@@ -90,16 +91,20 @@ export default class SideBar {
     const filterElements = Object.values(filters).map(filter => filter && filter.element);
     const divider = document.createElement('div')
     divider.classList.add('divider')
-    filterElements.splice(1,0, divider)
-    return filterElements;
+    let filterTemplate = [];
+    filterElements.forEach(filter => {
+      filterTemplate.push(filter);
+      if(filterElements.at(-1) != filter) filterTemplate.push(divider);
+    })
+    return filterTemplate;
   }
 
   addEventListeners() {
-    this.subElements.button.addEventListener('click', this.onCheck);
+    this.subElements.button.addEventListener('click', this.clearFilters);
   }
 
   removeEventListeners() {
-    this.subElements.button.removeEventListener('click', this.onCheck);
+    this.subElements.button.removeEventListener('click', this.clearFilters);
   }
 
 }
