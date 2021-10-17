@@ -144,11 +144,6 @@ export default class DoubleSlider {
     }
   }
 
-  // getValueInPercent(value) {
-  //   const sliderWidth = this.subElements.sliderInner.getBoundingClientRect().width;
-  //   return Math.floor(value * 100 / sliderWidth);
-  // }
-
   addEventListeners() {
     this.subElements.thumbLeft.addEventListener('pointerdown', this.leftThumbDrag)
     this.subElements.thumbRight.addEventListener('pointerdown', this.rightThumbDrag)
