@@ -1,26 +1,6 @@
-* {
-  font-family: 'Montserrat', sans-serif;
-  font-style: normal;
-  font-weight: 300;
-}
-
-html {
-  font-size: 6.25%;
-}
-
-@media (max-width: 1250px) {
-  html {
-    font-size: 3.8%;
-  }
-}
-
-body::-webkit-scrollbar {
-  display: none;
-}
-
 .card {
   height: 486rem;
-  width: 400rem;
+  width: 100%;
   border-radius: 8rem;
   box-shadow: 0 2rem 8rem rgba(0, 0, 0, 0.14);
   background: white;
@@ -39,8 +19,8 @@ figure{
 }
 
 .product {
-
   height: auto;
+  max-height: 80%;
   max-width: 238rem;
   border-radius: 0;
   position: relative;

@@ -1,0 +1,60 @@
+footer {
+  grid-area: foot;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 20rem;
+  font-weight: 300;
+  font-size: 18px;
+}
+
+.arrow {
+  width: 40rem;
+  height: 40rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border:0;
+  border-radius: 100%;
+  background: #EDEDED;
+}
+
+.back {
+  transform: rotate(180deg);
+}
+
+.pages {
+  height: 40rem;
+  padding: 0 15rem 0 15rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 15rem;
+  text-decoration: none;
+  background: #EDEDED;
+  border:0;
+  box-shadow: none;
+  border-radius: 40rem;
+}
+
+.pages a {
+  color: black;
+  text-decoration: none;
+}
+.pages a:visited{
+  color: black;
+  text-decoration: none;
+}
+
+.active {
+  width: 40rem;
+  height: 40rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 100%;
+  background: #6F64F8;
+  color: black;
+}

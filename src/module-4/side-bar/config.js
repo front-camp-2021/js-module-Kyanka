@@ -18,6 +18,7 @@ export const categoryFilterConfig = [
   {
     value: 'category=audio',
     title: 'Audio',
+    checked: true
   }
 ];
 

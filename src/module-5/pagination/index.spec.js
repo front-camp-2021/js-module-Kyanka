@@ -1,4 +1,4 @@
-import Pagination from './solution';
+import Pagination from './index.js';
 
 describe('Pagination', () => {
   let pagination;
