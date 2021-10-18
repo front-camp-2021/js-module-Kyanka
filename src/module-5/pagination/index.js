@@ -4,26 +4,31 @@ export default class Pagination {
   pageIndex = 0;
   subElements = {};
 
-  goToPrevPage = () => {
+  goToPrevPage = (event) => {
+    event.preventDefault();
     this.page -= 1;
-    this.update();
+    this.setActive();
+    this.dispatchPageEvent();
   }
 
-  goToNextPage = () => {
+  goToNextPage = (event) => {
+    event.preventDefault();
     this.page += 1;
-    this.update();
+    this.setActive();
+    this.dispatchPageEvent();
   }
 
   goToPage = (event) => {
+    event.preventDefault();
     this.page = parseInt(event.target.dataset.id);
-    //this.page = event
-    this.update()
+    this.setActive();
+    this.dispatchPageEvent();
   }
 
   constructor({
-    totalPages = 10,
-    page = 1,
-  } = {}) {
+                totalPages = 10,
+                page = 1,
+              } = {}) {
     this.totalPages = totalPages;
     this.page = page;
     this.pageIndex = page - 1;
@@ -34,15 +39,16 @@ export default class Pagination {
 
   get pagesTemplate() {
     let pages = ``;
-    for(let i = this.start; i < this.totalPages; i++ ){
-      let page;
-      if(i === this.page -1) {
-        page = `<a data-element="pages" data-id="${i + 1}" class="active">${i + 1}</a>`
-      } else {
-        page = `<a data-element="pages" data-id="${i + 1}">${i + 1}</a>`
+    if (this.totalPages > 0)
+      for (let i = this.start; i < this.totalPages; i++) {
+        let page;
+        if (i === this.page - 1) {
+          page = `<a data-id="${i + 1}" class="active">${i + 1}</a>`
+        } else {
+          page = `<a data-id="${i + 1}">${i + 1}</a>`
+        }
+        pages += page;
       }
-      pages += page;
-    }
     return pages;
   }
 
@@ -51,7 +57,6 @@ export default class Pagination {
 <footer>
   <button data-element="prevPage" class="arrow back"><img src="./../../icons/arrow.svg"></button>
   <div data-element="pagesList" class="pages">
-    ${this.pagesTemplate}
   </div>
   <button data-element="nextPage" class="arrow"><img src="./../../icons/arrow.svg"></button>
 </footer>`
@@ -61,6 +66,12 @@ export default class Pagination {
     const wrapper = document.createElement('div');
     wrapper.innerHTML = this.template;
     this.element = wrapper.firstElementChild;
+    this.getSubElements();
+    if (!this.totalPages) {
+      this.subElements.pagesList.innerHTML = ``;
+    } else {
+      this.subElements.pagesList.innerHTML = this.pagesTemplate;
+    }
   }
 
   getSubElements() {
@@ -68,11 +79,7 @@ export default class Pagination {
     const elements = this.element.querySelectorAll('[data-element]');
     for (const subElement of elements) {
       const name = subElement.dataset.element;
-
-      if(result[name] && !(result[name] instanceof NodeList)){
-        result[name] = this.element.querySelectorAll(`[data-element=${name}]`);
-      } else
-        result[name] = subElement;
+      result[name] = subElement;
     }
     this.subElements = result;
   }
@@ -89,23 +96,30 @@ export default class Pagination {
     this.element = null;
   }
 
-  update() {
+  update(totalPages) {
+    this.totalPages = totalPages;
+    this.pageIndex = this.start;
+    this.page = this.start + 1;
+    if(!this.totalPages) {
+      this.element.innerHTML = '';
+    } else {
+      this.subElements.pagesList.innerHTML = this.pagesTemplate
+    }
+  }
+
+  setActive() {
     if (this.page < 1) {
       this.page = 1
-    }
-    else if (this.page > this.totalPages) {
+    } else if (this.page > this.totalPages) {
       this.page = this.totalPages
     }
     this.element.querySelector('.active').classList.remove('active');
     this.element.querySelectorAll('a')[this.page - 1].classList.add('active');
+  }
 
-    if (this.element) {
-      this.element.dispatchEvent(new CustomEvent('page-changed', {
-        detail: {
-          page: this.page
-        }
-      }));
-    }
+  dispatchPageEvent() {
+    const newEvent = new CustomEvent("page-changed", {bubbles: true, detail: this.page});
+    this.element.dispatchEvent(newEvent);
   }
 
   addEventListeners() {

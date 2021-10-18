@@ -29,6 +29,7 @@ export default class DoubleSlider {
   progressStop = () => {
     this.moving.toLeft = false;
     this.moving.toRight = false;
+    this.dispatchRangeEvent();
   }
 
   constructor({
@@ -47,7 +48,7 @@ export default class DoubleSlider {
     this.max = max;
     this.formatValue = formatValue(value);
     this.selected = selected;
-    this.precision = 10 ** precision;
+    this.precision = precision;
     this.filterName = filterName;
 
     this.addFormatValue();
@@ -131,30 +132,26 @@ export default class DoubleSlider {
     this.subElements.progress.style.right = this.countRightValue();
     this.subElements.from.textContent = this.addFormatValue(this.selected.from);
     this.subElements.to.textContent = this.addFormatValue(this.selected.to);
-    if (this.element) {
-      this.element.dispatchEvent(new CustomEvent('range-selected', {
-        detail: {
-          filterName: this.filterName,
-          value: {
-            from: this.selected.from,
-            to: this.selected.to
-          }
-        }
-      }));
+    if(this.element){
+
     }
+  }
+  dispatchRangeEvent() {
+    const newEvent = new CustomEvent("range-selected", { bubbles: true, detail: {filterName: this.filterName, value: this.selected} });
+    this.element.dispatchEvent(newEvent);
   }
 
   addEventListeners() {
     this.subElements.thumbLeft.addEventListener('pointerdown', this.leftThumbDrag)
     this.subElements.thumbRight.addEventListener('pointerdown', this.rightThumbDrag)
-    document.addEventListener('pointermove', this.progressMove);
-    document.addEventListener('pointerup', this.progressStop);
+    this.element.addEventListener('pointermove', this.progressMove);
+    this.element.addEventListener('pointerup', this.progressStop);
   }
 
   removeEventListeners() {
     this.subElements.thumbLeft.removeEventListener('pointerdown', this.leftThumbDrag)
     this.subElements.thumbRight.removeEventListener('pointerdown', this.rightThumbDrag)
-    document.removeEventListener('pointermove', this.progressMove);
-    document.removeEventListener('pointerup', this.progressStop);
+    this.element.removeEventListener('pointermove', this.progressMove);
+    this.element.removeEventListener('pointerup', this.progressStop);
   }
 }

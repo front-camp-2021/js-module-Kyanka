@@ -1,0 +1,52 @@
+header {
+  grid-area: head;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #7E72F2;
+}
+
+.logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 25rem;
+}
+
+.logo > * {
+
+}
+
+.logo img {
+  margin: 0;
+  height: 70rem;
+  width: 90rem;
+}
+
+.logo p {
+  font-weight: 600;
+  font-size: 40rem;
+}
+
+header nav {
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+  gap: 14rem;
+  font-size: 14rem;
+  font-weight: 400;
+}
+
+header nav img {
+  width: 14rem;
+}
+
+header nav a span {
+  font-size: 25rem;
+}
+
+header a {
+  text-decoration: none;
+  color: #7E72F2;
+}
+

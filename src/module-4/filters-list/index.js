@@ -2,8 +2,9 @@ export default class FiltersList {
   element;
   subElements = {};
   onCheck = event => {
+    if(event.target.type !== "checkbox") return;
     const customEventName = event.target.checked ? 'add-filter' : 'remove-filter';
-    this.element.dispatchEvent(new CustomEvent(customEventName, { detail: event.target.value }));
+    event.target.dispatchEvent(new CustomEvent(customEventName, { bubbles: true, detail: event.target.value }));
   }
   constructor({
                 title = '',
